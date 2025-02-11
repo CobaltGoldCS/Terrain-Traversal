@@ -16,11 +16,9 @@ vis.AddSkyBox()
 vis.AddCamera(ChVector3d(0, 8, 6))
 vis.AddTypicalLights()
 
-obj = Path("terrain/moab-slice.obj").resolve()
-terrain = TTTerrain(sys, obj)
-#terrain.AddPatch(terrain.contact_material_one(), ChCoordsysd(), obj)
-print(obj.resolve())
-terrain.AddPatch(terrain.contact_material_one(), ChCoordsysd(), obj.resolve())
+bmp = Path("terrain/patch_1.bmp").resolve()
+terrain = TTTerrain(sys, str(bmp))
+print(bmp.resolve())
 terrain.Initialize()
 
 
