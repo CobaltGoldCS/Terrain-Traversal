@@ -12,13 +12,13 @@ my_body_A.SetName("Ground-Truss")
 my_body_B = ChBody()
 sys.AddBody(my_body_B)
 my_body_B.SetPos(ChVector3d(1, 0, 0))
-my_body_B.SetMass(2)
+my_body_B.SetMass(10)
 my_body_B.SetName("Crank")
 
 my_body_C = ChBody()
 sys.AddBody(my_body_C)
 my_body_C.SetPos(ChVector3d(4, 0, 0));
-my_body_C.SetMass(3)
+my_body_C.SetMass(50)
 my_body_C.SetName("Rod")
 
 
@@ -54,25 +54,20 @@ vis.AddTypicalLights();
 realtime_timer = ChRealtimeStepTimer()
 time_step = 0.01;
 
-removed = False
 while (vis.Run()):
 
     vis.BeginScene();
 
     vis.Render();
 
-    drawGrid(vis, 0.5, 0.5);
+    drawGrid(vis, 0.5, 2);
     vis.GetGUIEnvironment().drawAll();
 
     drawSegment(vis, my_link_BC.GetMarker1().GetAbsCoordsys().pos,
                         my_link_CA.GetMarker1().GetAbsCoordsys().pos, ChColor(0, 1, 0));
     drawSegment(vis, my_link_AB.GetFrame2Abs().GetCoordsys().pos,
-                        my_link_BC.GetMarker1().GetAbsCoordsys().pos, ChColor(1, 0, 0));
+                        my_link_BC.GetMarker1().GetAbsCoordsys().pos, ChColor(0, 0, 0));
     drawCircle(vis, 0.1, ChCoordsysd(ChVector3d(0, 0, 0), QUNIT));
-
-    if sys.GetChTime() >10 and (not removed):
-            sys.RemoveLink(my_link_AB);
-            removed = True;
 
     sys.DoStepDynamics(time_step);
     realtime_timer.Spin(time_step);
